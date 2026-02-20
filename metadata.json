@@ -1,0 +1,7 @@
+{
+  "name": "Blue Beach Resort Feedback",
+  "description": "A premium guest feedback system with sentiment analysis, gesture recognition, and admin analytics.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
