@@ -1,8 +1,7 @@
 
   # 🏖️ Blue Beach Resort Portal
   https://blue-beach-resort.onrender.com
-  ### *The complete real-time guest experience & operational command center.*
-</div>
+  
 
 ---
 
