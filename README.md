@@ -1,80 +1,92 @@
 <div align="center">
-  <img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  <img width="1200" height="475" alt="Blue Beach Resort Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  
+  # 🏖️ Blue Beach Resort Portal
+  ### *The complete real-time guest experience & operational command center.*
 </div>
 
-# Blue Beach Resort Portal
+---
 
-Welcome to the **Blue Beach Resort Portal**, a comprehensive web application designed to enhance hotel operations and guest experiences. This project acts as a dual-sided platform featuring a seamless **Guest Portal** and a powerful **Admin Dashboard** for hotel staff.
+## 🌟 Vision
+The **Blue Beach Resort Portal** is a sophisticated, dual-sided ecosystem designed to bridge the gap between luxury guest service and high-efficiency resort operations. Featuring a real-time WebSocket-driven backend, advanced AI concierge capabilities, and a premium administrative dashboard.
 
-## 🌟 Overview
+## ✨ Core Platforms
 
-The Blue Beach Resort Portal bridges the gap between guest satisfaction and operational efficiency. 
-Guests can use their portal to request room service, book tables, and provide detailed feedback about their stay. On the flip side, hotel staff can leverage the Admin Dashboard to monitor real-time hotel analytics, manage work orders, and respond to guest inquiries efficiently using an AI-powered concierge.
+### 📱 Guest Experience Portal
+Designed for perfection on any device, the guest portal empowers visitors to manage their stay seamlessly:
+*   **🛎️ e-Butler Service**: Instant requests for amenities, housekeeping, or room service.
+*   **🍽️ Dining Reservations**: Real-time booking at resort venues (Azure Grill, The Horizon, etc.).
+*   **💬 AI Concierge**: 24/7 assistance for Wi-Fi, pool hours, or local recommendations.
+*   **⭐ Smart Feedback**: A multi-step sentiment-aware feedback system with image upload support.
+*   **📄 Digital Folio**: Real-time itinerary and billing overview.
 
-## ✨ Key Features
-
-### For Guests
-*   **e-Butler Service**: Request amenities like extra towels, room service, or maintenance directly from a mobile-friendly interface.
-*   **Interactive Feedback System**: A dynamic, multi-step feedback form that allows guests to rate services (Dining, Spa, Room) using emojis, text, and photo uploads.
-*   **Resort Information**: View ongoing resort activities (Events) and dining options with real-time open/close statuses.
-
-### For Staff
-*   **Analytics Dashboard**: Visual charts (powered by Recharts) showing guest sentiment trends, feedback mix, and overall satisfaction scores.
-*   **Live Operations Grid**: A real-time grid view of all hotel rooms, indicating their current statuses (Clean, Dirty, Occupied, Maintenance).
-*   **Work Order Management**: A kanban-style tracking system for maintenance and housekeeping tickets.
-*   **AI Concierge**: Built-in integration with Google Gemini AI to auto-draft or auto-reply to common guest queries, saving staff time.
+### 🏢 Staff Operational Command (Admin)
+A high-performance sanctuary for resort staff to manage the pulse of the hotel:
+*   **📊 Overview Dashboard**: Real-time KPI tracking (Net Sentiment, Work Order Volume, Feedback Trends).
+*   **🚦 Live Operations Grid**: A color-coded, real-time map of all resort rooms showing occupancy and cleaning status.
+*   **🤖 AI Concierge Desk**: Staff can manually reply or engage the **AI Copilot** to autonomously handle guest queries.
+*   **🔧 Work Order Management**: Kanban-style tracking for maintenance and housekeeping tickets.
+*   **📋 Staff & Inventory**: Interactive roster with performance metrics and a smart inventory tracker for resort supplies.
 
 ## 🛠️ Tech Stack
 
-*   **Frontend**: React (v19)
-*   **Build Tool**: Vite
-*   **Styling**: Tailwind CSS
-*   **Routing**: React Router (`react-router-dom`)
-*   **Animations & Icons**: Framer Motion, Lucide React
-*   **Data Visualization**: Recharts
-*   **AI Integration**: Google Gemini API (`@google/genai`)
-*   **Storage**: Simulated In-Memory Database + LocalStorage (for session persistence)
+- **Frontend**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS + Framer Motion (premium animations)
+- **Backend**: Node.js + Express.js
+- **Database**: Supabase (PostgreSQL)
+- **Real-time**: WebSockets (Broadcast & Listeners)
+- **AI Engine**: Google Gemini 2.0 Flash (Feedback analysis & Autonomous replies)
+- **Visualization**: Recharts
 
-## 🚀 Setup & Execution
+## 🚀 Getting Started
 
-### Prerequisites
-*   Node.js (v18 or higher recommended)
-*   A Google Gemini API Key (for AI Concierge features)
+### 1. Prerequisites
+- Node.js (v18+)
+- Supabase Account
+- Google AI Studio API Key (Gemini)
 
-### Installation Steps
+### 2. Environment Configuration
+Create a `.env` file in the **root** for the frontend and a `.env` in the **backend** directory.
 
-1.  **Clone or Download the Repository:**
-    Navigate to your project directory.
+**Frontend (`.env`):**
+```env
+VITE_SUPABASE_URL=your_supabase_url
+VITE_SUPABASE_ANON_KEY=your_anon_key
+VITE_BACKEND_API_URL=http://localhost:4000/api
+VITE_BACKEND_WS_URL=ws://localhost:4000/ws
+```
 
-2.  **Install Dependencies:**
-    Run the following command in your terminal to install all required packages:
-    ```bash
-    npm install
-    ```
+**Backend (`backend/.env`):**
+```env
+SUPABASE_URL=your_supabase_url
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+GEMINI_API_KEY=your_gemini_api_key
+PORT=4000
+FRONTEND_URL=http://localhost:3000
+```
 
-3.  **Configure Environment Variables:**
-    *   Locate the `.env.local` or `.env` file in the root directory.
-    *   Add your Gemini API key:
-        ```env
-        VITE_GEMINI_API_KEY=your_api_key_here
-        ```
+### 3. Installation & Run
+```bash
+# Install root & backend dependencies
+npm install
+cd backend && npm install && cd ..
 
-4.  **Start the Development Server:**
-    ```bash
-    npm run dev
-    ```
+# Start the full-stack environment
+# (Uses concurrently or run separately)
+npm run dev      # Starts Frontend (Ports 3000)
+node backend/server.js  # Starts Backend (Port 4000)
+```
 
-5.  **View the App:**
-    Open your browser and navigate to `http://localhost:3000/` (or the port specified in your terminal).
+## 🧠 Smart Features
 
-## 🔮 Limitations & Future Improvements
+### Real-Time Reactor
+The system utilizes a custom WebSocket relay. When a guest submits a request, it is saved to Supabase, broadcasted via the Express backend, and instantly appears on the Admin Dashboard without a page refresh.
 
-This project serves as a robust frontend prototype, but there are areas for future enhancement:
+### AI Copilot (Concierge)
+Integrated Gemini AI analyzes guest feedback sentiment (Scale -1 to 1) and can autonomously reply to guest queries regarding Wi-Fi, resort hours, and basic services, freeing up staff for high-touch hospitality.
 
-1.  **Backend Integration**: The current application uses a simulated in-memory database (`services/db.ts`). A crucial next step is migrating to a real backend like Supabase, Firebase, or a custom Node.js/Express server with PostgreSQL to persist data across page refreshes.
-2.  **Authentication**: Implement secure JWT-based authentication for both staff and guests (currently simulated with LocalStorage).
-3.  **Responsive Design Refinement**: While mobile-friendly, the Admin Dashboard's dense data tables could be optimized further for smaller screens.
-4.  **Real-Time Capabilities**: Introduce WebSockets (e.g., Socket.io) to make the live operations and concierge chat instantly react to new data without needing simulated delays or polling.
+### Resilience Layer
+The application implements a **Fallback In-Memory Database**. If the backend or database connection is interrupted, the UI remains fully functional using an extensive pool of high-quality mock data, ensuring a 100% uptime perception.
 
 ---
-*Developed as a showcase of modern React frontend architecture and AI integration.*
+*Developed with focus on Luxury, Efficiency, and Real-time interactivity.*

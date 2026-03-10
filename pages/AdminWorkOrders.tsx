@@ -4,23 +4,29 @@ import { Plus, CheckCircle, AlertTriangle, Clock, Filter } from 'lucide-react';
 import { getMaintenanceTickets, createWorkOrder, updateTicketStatus } from '../services/db';
 import { MaintenanceTicket, TicketStatus, TicketPriority } from '../types';
 import { Button } from '../components/ui/Button';
+import { useSocketEvent } from '../services/useRealtimeSocket';
 
 export const AdminWorkOrders: React.FC = () => {
   const [tickets, setTickets] = useState<MaintenanceTicket[]>([]);
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [newTicket, setNewTicket] = useState<Partial<MaintenanceTicket>>({});
 
-  useEffect(() => {
-    loadTickets();
-  }, []);
-
   const loadTickets = async () => {
     const data = await getMaintenanceTickets();
     setTickets(data);
   };
 
+  useEffect(() => {
+    loadTickets();
+  }, []);
+
+  useSocketEvent('ticket:new', loadTickets);
+  useSocketEvent('ticket:updated', loadTickets);
+  useSocketEvent('ticket:deleted', loadTickets);
+
+
   const handleCreate = async () => {
-    if(!newTicket.issueDescription) return;
+    if (!newTicket.issueDescription) return;
     await createWorkOrder(newTicket);
     setNewTicket({});
     setIsFormOpen(false);
@@ -37,24 +43,24 @@ export const AdminWorkOrders: React.FC = () => {
           <p className="text-slate-500">Manage maintenance and housekeeping tasks</p>
         </div>
         <Button onClick={() => setIsFormOpen(!isFormOpen)}>
-          <Plus size={18} className="mr-2"/> New Order
+          <Plus size={18} className="mr-2" /> New Order
         </Button>
       </div>
 
       {isFormOpen && (
         <div className="bg-white p-4 rounded-xl shadow-lg border border-blue-100 space-y-4 animate-in slide-in-from-top-2">
-           <h3 className="font-bold">Create New Ticket</h3>
-           <div className="grid grid-cols-2 gap-4">
-             <input placeholder="Room Number" className="p-2 border rounded" onChange={e => setNewTicket({...newTicket, roomNumber: e.target.value})} />
-             <select className="p-2 border rounded" onChange={e => setNewTicket({...newTicket, priority: e.target.value as TicketPriority})}>
-               <option value="LOW">Low Priority</option>
-               <option value="MEDIUM">Medium</option>
-               <option value="HIGH">High</option>
-               <option value="URGENT">Urgent</option>
-             </select>
-             <input placeholder="Description" className="col-span-2 p-2 border rounded" onChange={e => setNewTicket({...newTicket, issueDescription: e.target.value})} />
-           </div>
-           <Button onClick={handleCreate}>Submit Order</Button>
+          <h3 className="font-bold">Create New Ticket</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <input placeholder="Room Number" className="p-2 border rounded" onChange={e => setNewTicket({ ...newTicket, roomNumber: e.target.value })} />
+            <select className="p-2 border rounded" onChange={e => setNewTicket({ ...newTicket, priority: e.target.value as TicketPriority })}>
+              <option value="LOW">Low Priority</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+              <option value="URGENT">Urgent</option>
+            </select>
+            <input placeholder="Description" className="col-span-2 p-2 border rounded" onChange={e => setNewTicket({ ...newTicket, issueDescription: e.target.value })} />
+          </div>
+          <Button onClick={handleCreate}>Submit Order</Button>
         </div>
       )}
 
@@ -74,7 +80,7 @@ export const AdminWorkOrders: React.FC = () => {
           <tbody className="divide-y divide-slate-100">
             {tickets.map(t => (
               <tr key={t.id} className="hover:bg-slate-50">
-                <td className="px-6 py-4 text-xs font-mono text-slate-400">#{t.id.slice(0,6)}</td>
+                <td className="px-6 py-4 text-xs font-mono text-slate-400">#{t.id.slice(0, 6)}</td>
                 <td className="px-6 py-4 font-bold">{t.roomNumber}</td>
                 <td className="px-6 py-4">{t.issueDescription}</td>
                 <td className="px-6 py-4"><span className={`text-xs font-bold px-2 py-1 rounded ${t.priority === 'URGENT' ? 'bg-red-500 text-white' : 'bg-slate-100 text-slate-600'}`}>{t.priority}</span></td>
