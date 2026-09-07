@@ -1,84 +1,49 @@
-# Blue Beach Resort Portal
+<div align="center">
+  <img width="1200" height="475" alt="Blue Beach Resort Banner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+  
+  # 🏖️ Blue Beach Resort Portal
+  ### *The complete real-time guest experience & operational command center.*
+</div>
 
-![Blue Beach Resort Portal](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
+---
 
-A full-stack resort management prototype that connects guest services with staff operations. Guests can request assistance, reserve dining, submit feedback, and ask concierge questions. Resort staff can monitor feedback, rooms, work orders, inventory, and live operational activity from one dashboard.
+## 🌟 Vision
+The **Blue Beach Resort Portal** is a sophisticated, dual-sided ecosystem designed to bridge the gap between luxury guest service and high-efficiency resort operations. Featuring a real-time WebSocket-driven backend, advanced AI concierge capabilities, and a premium administrative dashboard.
 
-> Live demo: [blue-beach-resort.onrender.com](https://blue-beach-resort.onrender.com/)
+## ✨ Core Platforms
 
-## Features
+### 📱 Guest Experience Portal
+Designed for perfection on any device, the guest portal empowers visitors to manage their stay seamlessly:
+*   **🛎️ e-Butler Service**: Instant requests for amenities, housekeeping, or room service.
+*   **🍽️ Dining Reservations**: Real-time booking at resort venues (Azure Grill, The Horizon, etc.).
+*   **💬 AI Concierge**: 24/7 assistance for Wi-Fi, pool hours, or local recommendations.
+*   **⭐ Smart Feedback**: A multi-step sentiment-aware feedback system with image upload support.
+*   **📄 Digital Folio**: Real-time itinerary and billing overview.
 
-### Guest portal
+### 🏢 Staff Operational Command (Admin)
+A high-performance sanctuary for resort staff to manage the pulse of the hotel:
+*   **📊 Overview Dashboard**: Real-time KPI tracking (Net Sentiment, Work Order Volume, Feedback Trends).
+*   **🚦 Live Operations Grid**: A color-coded, real-time map of all resort rooms showing occupancy and cleaning status.
+*   **🤖 AI Concierge Desk**: Staff can manually reply or engage the **AI Copilot** to autonomously handle guest queries.
+*   **🔧 Work Order Management**: Kanban-style tracking for maintenance and housekeeping tickets.
+*   **📋 Staff & Inventory**: Interactive roster with performance metrics and a smart inventory tracker for resort supplies.
 
-- Guest sign-up and sign-in flow
-- Multi-category stay feedback with optional image upload
-- AI-assisted feedback sentiment analysis and reward coupon generation
-- e-Butler service requests for housekeeping, maintenance, room service, concierge, and transport
-- Dining reservations and resort activity browsing
-- AI concierge for common guest questions
-- Guest profile and stay information
+## 🛠️ Tech Stack
 
-### Staff portal
+- **Frontend**: React 19 + TypeScript + Vite
+- **Styling**: Tailwind CSS + Framer Motion (premium animations)
+- **Backend**: Node.js + Express.js
+- **Database**: Supabase (PostgreSQL)
+- **Real-time**: WebSockets (Broadcast & Listeners)
+- **AI Engine**: Google Gemini 2.0 Flash (Feedback analysis & Autonomous replies)
+- **Visualization**: Recharts
 
-- Dashboard with feedback, sentiment, and operational metrics
-- Live room-status grid for occupancy, cleaning, DND, and maintenance states
-- Maintenance work-order tracking
-- Guest query management with staff or AI-generated replies
-- Service-request and dining-booking monitoring
-- Staff performance overview and inventory tracking
+## 🚀 Getting Started
 
-## Tech Stack
-
-- Frontend: React, TypeScript, Vite
-- UI: Tailwind CSS, Framer Motion, Lucide React
-- Backend: Node.js, Express
-- Database: Supabase (PostgreSQL)
-- Real-time updates: WebSockets and Supabase Realtime
-- AI: Google Gemini
-- Charts: Recharts
-
-## How It Works
-
-```text
-Guest or staff action
-        |
-        v
-React frontend
-        |
-        v
-Express API -> Supabase database
-        |
-        +-> Gemini AI for feedback analysis and concierge replies
-        |
-        +-> WebSocket events for live dashboard updates
-```
-
-For example, when a guest submits feedback, the backend analyzes the written comments, stores the feedback and individual ratings in Supabase, creates a reward coupon, and broadcasts the new item to connected staff dashboards.
-
-## Project Structure
-
-```text
-.
-|-- pages/                 # Guest and staff application screens
-|-- components/            # Reusable layouts and UI components
-|-- context/               # Guest session state
-|-- services/              # Frontend API, Supabase, Gemini, and WebSocket helpers
-|-- backend/
-|   |-- routes/            # Express API endpoints
-|   |-- server.js          # API server and WebSocket setup
-|   `-- gemini.js          # Server-side AI helpers
-|-- supabase_schema.sql    # Database schema
-|-- App.tsx                # Routes and application entry structure
-`-- vite.config.ts         # Development server configuration
-```
-
-## Run Locally
-
-### Prerequisites
-
-- Node.js 18 or newer
-- A Supabase project
-- A Google Gemini API key (optional for mock/demo AI responses)
+### 1. Prerequisites
+- Node.js (v18+)
+- Supabase Account
+- Google AI Studio API Key (Gemini)
 
 ### 1. Clone and install dependencies
 
