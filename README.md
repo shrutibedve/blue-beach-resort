@@ -1,6 +1,7 @@
 <div align="center">
 
-  
+https://blue-beach-resort.onrender.com/
+
   # 🏖️ Blue Beach Resort Portal
   ### *The complete real-time guest experience & operational command center.*
 </div>
